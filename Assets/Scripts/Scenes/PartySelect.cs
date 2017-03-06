@@ -96,7 +96,7 @@ public class PartySelect : MonoBehaviour
 			gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 		}
 
-		PartyNumText.text = partyNum.ToString() + '/' + Actor.partyLen;
+		PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
 		jobInfoUpdate();
 	
 		NextButton.OnClickAsObservable()

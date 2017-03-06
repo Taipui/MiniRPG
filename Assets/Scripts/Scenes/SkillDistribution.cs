@@ -82,7 +82,7 @@ public class SkillDistribution : MonoBehaviour
 			gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 		}
 
-		PartyNumText.text = partyNum.ToString() + '/' + Actor.partyLen;
+		PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
 		JobNameText.text = gm.Party[partyNum - 1].ActorName;
 
 		distribute();
@@ -97,7 +97,7 @@ public class SkillDistribution : MonoBehaviour
 		DecideButton.OnClickAsObservable()
 			.Subscribe(_ => {
 				gm.Party[partyNum++ - 1].StatusList = tempStatus;
-				PartyNumText.text = partyNum.ToString() + '/' + Actor.partyLen;
+				PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
 				JobNameText.text = gm.Party[partyNum - 1].ActorName;
 			})
 			.AddTo(this);
