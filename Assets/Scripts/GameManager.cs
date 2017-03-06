@@ -14,6 +14,11 @@ public class GameManager
 	/// </summary>
 	public const int JobLen = 4;
 
+	/// <summary>
+	/// ステータスの項目数
+	/// </summary>
+	public const int StatusLen = 5;
+
 	List<Actor> party = new List<Actor>();
 	public List<Actor> Party {
 		get

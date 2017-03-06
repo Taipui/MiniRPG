@@ -5,22 +5,6 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
 	/// <summary>
-	/// ステータスの各項目名
-	/// </summary>
-	string[] statusNames = {"たいりょく", "まりょく", "こうげき", "ぼうぎょ", "すばやさ"};
-	public string[] StatusNames {
-		get
-		{
-			return statusNames;
-		}
-	}
-
-	/// <summary>
-	/// ステータスの項目数
-	/// </summary>
-	static public int statusLen;
-
-	/// <summary>
 	/// 分配できるスキルポイント数
 	/// </summary>
 	public const int MaxSkillPoint = 10;
@@ -124,8 +108,6 @@ public class Actor : MonoBehaviour
 	void Awake()
 	{
 		Debug.Log("ActorAwake");
-
-		statusLen = statusNames.Length;
 	}
 	
 	void Update()

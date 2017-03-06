@@ -50,8 +50,8 @@ public class SkillDistribution : MonoBehaviour
 		int skillPoint = Actor.MaxSkillPoint;
 		tempStatus = GameManager.Instance.Party[partyNum].StatusList;
 
-		for (int i = 0; i < Actor.statusLen; ++i) {
-			if (i < Actor.statusLen - 1) {
+		for (int i = 0; i < GameManager.StatusLen; ++i) {
+			if (i < GameManager.StatusLen - 1) {
 				int tempSkillPoint = Random.Range(0, skillPoint > tempStatus[i] ? skillPoint - tempStatus[i] : skillPoint) - 1;
 				tempStatus[i] += tempSkillPoint;
 				skillPoint -= tempSkillPoint;
@@ -60,7 +60,7 @@ public class SkillDistribution : MonoBehaviour
 			}
 		}
 
-		for (int i = 0; i < Actor.statusLen; ++i) {
+		for (int i = 0; i < GameManager.StatusLen; ++i) {
 			StatusValueTexts[i].text = tempStatus[i].ToString();
 		}
 	}
