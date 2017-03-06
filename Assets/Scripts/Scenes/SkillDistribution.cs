@@ -52,9 +52,12 @@ public class SkillDistribution : MonoBehaviour
 
 		for (int i = 0; i < GameManager.StatusLen; ++i) {
 			if (i < GameManager.StatusLen - 1) {
-				int tempSkillPoint = Random.Range(0, skillPoint > tempStatus[i] ? skillPoint - tempStatus[i] : skillPoint) - 1;
+				int tempSkillPoint = Random.Range(0, skillPoint > tempStatus[i] ? skillPoint - tempStatus[i] : skillPoint) + 1;
 				tempStatus[i] += tempSkillPoint;
 				skillPoint -= tempSkillPoint;
+				if (skillPoint == 0) {
+					break;
+				}
 			} else {
 				tempStatus[i] += skillPoint;
 			}
