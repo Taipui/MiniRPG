@@ -5,15 +5,6 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
 	/// <summary>
-	/// 職業名
-	/// </summary>
-
-	/// <summary>
-	/// 職業の数
-	/// </summary>
-	static public int jobLen = 4;
-
-	/// <summary>
 	/// ステータスの各項目名
 	/// </summary>
 	string[] statusNames = {"たいりょく", "まりょく", "こうげき", "ぼうぎょ", "すばやさ"};

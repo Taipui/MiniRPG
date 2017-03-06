@@ -9,6 +9,11 @@ public class GameManager
 	/// </summary>
 	public const int PartyLen = 3;
 
+	/// <summary>
+	/// 職業の数
+	/// </summary>
+	public const int JobLen = 4;
+
 	List<Actor> party = new List<Actor>();
 	public List<Actor> Party {
 		get
