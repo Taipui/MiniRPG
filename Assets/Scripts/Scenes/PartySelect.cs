@@ -101,14 +101,14 @@ public class PartySelect : MonoBehaviour
 	
 		NextButton.OnClickAsObservable()
 			.Subscribe(_ => {
-				currentJob = (++currentJob + Actor.jobLen) % Actor.jobLen;
+				currentJob = (++currentJob + GameManager.JobLen) % GameManager.JobLen;
 				jobInfoUpdate();
 			})
 			.AddTo(this);
 
 		PrevButton.OnClickAsObservable()
 			.Subscribe(_ => {
-				currentJob = (--currentJob + Actor.jobLen) % Actor.jobLen;
+				currentJob = (--currentJob + GameManager.JobLen) % GameManager.JobLen;
 				jobInfoUpdate();
 			})
 			.AddTo(this);
@@ -117,10 +117,10 @@ public class PartySelect : MonoBehaviour
 			.Subscribe(_ => {
 				gm.Party.Add(jobs[currentJob]);
 				++partyNum;
-				if (partyNum == Actor.partyLen + 1) {
+				if (partyNum == GameManager.PartyLen + 1) {
 					SceneManager.LoadScene("SkillDistribution");
 				} else {
-					PartyNumText.text = partyNum.ToString() + '/' + Actor.partyLen;
+					PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
 					currentJob = 0;
 					jobInfoUpdate();
 				}
