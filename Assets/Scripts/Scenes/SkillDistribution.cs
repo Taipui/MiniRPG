@@ -47,7 +47,7 @@ public class SkillDistribution : MonoBehaviour
 	}
 
 	void distribute() {
-		int skillPoint = Actor.MaxSkillPoint;
+		int skillPoint = GameManager.MaxSkillPoint;
 		tempStatus = GameManager.Instance.Party[partyNum].StatusList;
 
 		for (int i = 0; i < GameManager.StatusLen; ++i) {

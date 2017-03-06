@@ -5,11 +5,6 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
 	/// <summary>
-	/// 分配できるスキルポイント数
-	/// </summary>
-	public const int MaxSkillPoint = 10;
-
-	/// <summary>
 	/// 最下階
 	/// </summary>
 	public const int MaxFloor = 10;

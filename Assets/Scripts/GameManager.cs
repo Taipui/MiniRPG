@@ -19,6 +19,11 @@ public class GameManager
 	/// </summary>
 	public const int StatusLen = 5;
 
+	/// <summary>
+	/// 分配できるスキルポイント数
+	/// </summary>
+	public const int MaxSkillPoint = 10;
+
 	List<Actor> party = new List<Actor>();
 	public List<Actor> Party {
 		get
