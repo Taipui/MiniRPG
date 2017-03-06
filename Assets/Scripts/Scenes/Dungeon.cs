@@ -232,7 +232,7 @@ public class Dungeon : MonoBehaviour
 	}
 
 	void partyShow() {
-		for (int i = 0; i < Actor.partyLen; ++i) {
+		for (int i = 0; i < GameManager.PartyLen; ++i) {
 			Debug.Log(gm.Party[i].ActorName);
 		}
 	}

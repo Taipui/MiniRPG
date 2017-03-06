@@ -5,11 +5,6 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
 	/// <summary>
-	/// パーティーの人数
-	/// </summary>
-	public const int partyLen = 3;
-
-	/// <summary>
 	/// 職業名
 	/// </summary>
 
