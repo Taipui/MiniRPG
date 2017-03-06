@@ -89,13 +89,6 @@ public class PartySelect : MonoBehaviour
 	{
 		Debug.Log("PartySelectStart");
 
-		if (GameObject.Find("GameManager") == null) {
-			GameObject go = new GameObject("GameManager");
-			gm = go.AddComponent<GameManager>();
-		} else {
-			gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-		}
-
 		PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
 		jobInfoUpdate();
 	
@@ -115,7 +108,7 @@ public class PartySelect : MonoBehaviour
 	
 		DecideButton.OnClickAsObservable()
 			.Subscribe(_ => {
-				gm.Party.Add(jobs[currentJob]);
+				GameManager.Instance.Party.Add(jobs[currentJob]);
 				++partyNum;
 				if (partyNum == GameManager.PartyLen + 1) {
 					SceneManager.LoadScene("SkillDistribution");

@@ -43,12 +43,12 @@ public class SkillDistribution : MonoBehaviour
 	Button DecideButton;
 
 	void jobInfoUpdate() {
-		JobNameText.text = gm.Party[partyNum].ActorName;
+		JobNameText.text = GameManager.Instance.Party[partyNum].ActorName;
 	}
 
 	void distribute() {
 		int skillPoint = Actor.MaxSkillPoint;
-		tempStatus = gm.Party[partyNum].StatusList;
+		tempStatus = GameManager.Instance.Party[partyNum].StatusList;
 
 		for (int i = 0; i < Actor.statusLen; ++i) {
 			if (i < Actor.statusLen - 1) {
@@ -69,21 +69,18 @@ public class SkillDistribution : MonoBehaviour
 	{
 		Debug.Log("SkillDistributionStart");
 
-		if (GameObject.Find("GameManager") == null) {
-			GameObject go = new GameObject("GameManager");
-			gm = go.AddComponent<GameManager>();
-			Brave brave = go.AddComponent<Brave>();
-			Warrior warrior = go.AddComponent<Warrior>();
-			Monk monk = go.AddComponent<Monk>();
-			gm.Party.Add(brave);
-			gm.Party.Add(warrior);
-			gm.Party.Add(monk);
-		} else {
-			gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+		if (GameManager.Instance.Party.Count == 0) {
+			Brave brave = gameObject.AddComponent<Brave>();
+			Warrior warrior = gameObject.AddComponent<Warrior>();
+			Monk monk = gameObject.AddComponent<Monk>();
+
+			GameManager.Instance.Party.Add(brave);
+			GameManager.Instance.Party.Add(warrior);
+			GameManager.Instance.Party.Add(monk);
 		}
 
 		PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
-		JobNameText.text = gm.Party[partyNum - 1].ActorName;
+		JobNameText.text = GameManager.Instance.Party[partyNum - 1].ActorName;
 
 		distribute();
 
@@ -96,9 +93,9 @@ public class SkillDistribution : MonoBehaviour
 
 		DecideButton.OnClickAsObservable()
 			.Subscribe(_ => {
-				gm.Party[partyNum++ - 1].StatusList = tempStatus;
+				GameManager.Instance.Party[partyNum++ - 1].StatusList = tempStatus;
 				PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
-				JobNameText.text = gm.Party[partyNum - 1].ActorName;
+				JobNameText.text = GameManager.Instance.Party[partyNum - 1].ActorName;
 			})
 			.AddTo(this);
 	}

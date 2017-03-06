@@ -22,6 +22,17 @@ public class GameManager
 		}
 	}
 
+	static GameManager instance = new GameManager();
+	public static GameManager Instance {
+		get
+		{
+			if (instance == null) {
+				instance = new GameManager();
+			}
+			return instance;
+		}
+	}
+
 	void Start()
 	{
 

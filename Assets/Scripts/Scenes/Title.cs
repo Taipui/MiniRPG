@@ -11,11 +11,6 @@ public class Title : MonoBehaviour
 
 	void Start()
 	{
-		if (GameObject.Find("GameManager") == null) {
-			GameObject go = new GameObject("GameManager");
-			go.AddComponent<GameManager>();
-		}
-
 		this.UpdateAsObservable().Where(x => Input.GetMouseButtonDown(0))
 			.Subscribe(_ => {
 				SceneManager.LoadScene("PartySelect");

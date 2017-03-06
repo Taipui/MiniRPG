@@ -154,17 +154,14 @@ public class Dungeon : MonoBehaviour
 
 	void Start()
 	{
-		if (GameObject.Find("GameManager") == null) {
-			GameObject go = new GameObject("GameManager");
-			gm = go.AddComponent<GameManager>();
-			Brave brave = go.AddComponent<Brave>();
-			Warrior warrior = go.AddComponent<Warrior>();
-			Monk monk = go.AddComponent<Monk>();
-			gm.Party.Add(brave);
-			gm.Party.Add(warrior);
-			gm.Party.Add(monk);
-		} else {
-			gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+		if (GameManager.Instance.Party.Count == 0) {
+			Brave brave = gameObject.AddComponent<Brave>();
+			Warrior warrior = gameObject.AddComponent<Warrior>();
+			Monk monk = gameObject.AddComponent<Monk>();
+
+			GameManager.Instance.Party.Add(brave);
+			GameManager.Instance.Party.Add(warrior);
+			GameManager.Instance.Party.Add(monk);
 		}
 
 		Slime slime = gameObject.AddComponent<Slime>();
