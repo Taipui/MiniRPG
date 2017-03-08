@@ -8,7 +8,7 @@ public class SkillDistribution : MonoBehaviour
 {
 	GameManager gm;
 
-	int partyNum = 1;
+	int partyNum = 0;
 
 	List<int> tempStatus = new List<int>();
 
@@ -44,27 +44,36 @@ public class SkillDistribution : MonoBehaviour
 
 	void jobInfoUpdate() {
 		JobNameText.text = GameManager.Instance.Party[partyNum].ActorName;
+		PartyNumText.text = (partyNum + 1).ToString() + '/' + GameManager.PartyLen;
 	}
 
 	void distribute() {
 		int skillPoint = GameManager.MaxSkillPoint;
-		tempStatus = GameManager.Instance.Party[partyNum].StatusList;
+		tempStatus = new List<int>(GameManager.Instance.Party[partyNum].StatusList);
+		showTempStatus(tempStatus);
 
 		for (int i = 0; i < GameManager.StatusLen; ++i) {
+			int tempSkillPoint = 0;
 			if (i < GameManager.StatusLen - 1) {
-				int tempSkillPoint = Random.Range(0, skillPoint > tempStatus[i] ? skillPoint - tempStatus[i] : skillPoint) + 1;
-				tempStatus[i] += tempSkillPoint;
-				skillPoint -= tempSkillPoint;
-				if (skillPoint == 0) {
-					break;
-				}
+				tempSkillPoint = Random.Range(-1, skillPoint + tempStatus[i] > GameManager.MaxSkillPoint ? skillPoint - tempStatus[i] : skillPoint) + 1;
 			} else {
-				tempStatus[i] += skillPoint;
+				tempSkillPoint = skillPoint;
 			}
-		}
+//			Debug.Log("tempSkillPoint:" + tempSkillPoint);
+			tempStatus[i] += tempSkillPoint;
+//			Debug.Log("tempStatus[" + i + "]:" + tempStatus[i]);
+			skillPoint -= tempSkillPoint;
+//			Debug.Log("skillPoint:" + skillPoint);
 
-		for (int i = 0; i < GameManager.StatusLen; ++i) {
 			StatusValueTexts[i].text = tempStatus[i].ToString();
+//			Debug.Log("StatusValueTexts[" + i + "].text:" + StatusValueTexts[i].text);
+
+		}
+	}
+
+	void showTempStatus(List<int> tempStatus) {
+		for (int i = 0; i < GameManager.StatusLen; ++i) {
+			Debug.Log("tempStatus[" + i + "]:" + tempStatus[i]);
 		}
 	}
 
@@ -81,9 +90,8 @@ public class SkillDistribution : MonoBehaviour
 			GameManager.Instance.Party.Add(warrior);
 			GameManager.Instance.Party.Add(monk);
 		}
-
-		PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
-		JobNameText.text = GameManager.Instance.Party[partyNum - 1].ActorName;
+			
+		jobInfoUpdate();
 
 		distribute();
 
@@ -96,9 +104,9 @@ public class SkillDistribution : MonoBehaviour
 
 		DecideButton.OnClickAsObservable()
 			.Subscribe(_ => {
-				GameManager.Instance.Party[partyNum++ - 1].StatusList = tempStatus;
-				PartyNumText.text = partyNum.ToString() + '/' + GameManager.PartyLen;
-				JobNameText.text = GameManager.Instance.Party[partyNum - 1].ActorName;
+				GameManager.Instance.Party[partyNum++].StatusList = tempStatus;
+				jobInfoUpdate();
+				distribute();
 			})
 			.AddTo(this);
 	}
